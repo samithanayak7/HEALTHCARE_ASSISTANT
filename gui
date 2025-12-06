@@ -1,27 +1,58 @@
 import wx
 
 app = wx.App(False)
-frame = wx.Frame(None, title="BMI CALCULATOR", size=(800, 900))
+frame = wx.Frame(None, title="BMI CALCULATOR", size=(1200, 800))
 panel = wx.Panel(frame)
-panel.SetBackgroundColour("light blue")
+panel.SetBackgroundColour("#FFE4CF")
 
 # HEADING
-heading = wx.StaticText(panel, label="BMI CALCULATOR", pos=(280, 20))
-heading.SetFont(wx.Font(22, wx.FONTFAMILY_ROMAN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
+heading = wx.StaticText(panel, label="BMI CALCULATOR", pos=(450, 60))
+heading.SetFont(wx.Font(36, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
+heading.SetForegroundColour("#d1001f")
 
-#BMI DESCRIPTION
+# SUBHEADING
+sub_heading = wx.StaticText(panel, label="Body Mass Index", pos=(450, 120))
+sub_heading.SetFont(wx.Font(24, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
+sub_heading.SetForegroundColour("#d1001f")
+
+#BMI IMAGE
+bmi_img = wx.Image("bmi.png")      # your file name
+bmi_img = bmi_img.Scale(350, 180)
+bmi_bmp = wx.Bitmap(bmi_img)
+
+bmi_icon = wx.StaticBitmap(panel, bitmap=bmi_bmp, pos=(40, 20))
+
+
+# BMI DESCRIPTION
 text = (
-    "Body Mass Index (BMI) is a popular metric to help you track your health based on "
-    "body fat constituency. You this BMI calculator to "
-    "know your health status.\n\n"
-    "In today's world of changing lifestyles, stress and unhealthy eating habits, it is "
-    "highly important to keep track of your health.\n\n"
-    "By keeping track of your weight, you can take timely measures to reduce the chances "
-    "of obesity-related health issues."
+    "Body Mass Index (BMI) is a popular metric to help you track your health based on body fat constituency.\n"
+    "You can use this BMI calculator to know your health status.\n"
+    "In today's world of changing lifestyles, stress and unhealthy eating habits, it is highly important to "
+    "keep track of your health.\n"
+    "By keeping track of your weight, you can take timely measures to reduce the chances of obesity-related health issues."
 )
 
-paragraph = wx.StaticText(panel, label=text, pos=(40, 80))
-paragraph.SetFont(wx.Font(12, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
+paragraph = wx.StaticText(panel, label=text, pos=(40, 200))
+paragraph.SetFont(wx.Font(16, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
+
+# GENDER LABEL
+gender = wx.StaticText(panel, label="Gender:", pos=(40, 310))
+gender.SetFont(wx.Font(12, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
+
+btn_male = wx.RadioButton(panel, label="Male", pos=(120, 310))
+btn_female = wx.RadioButton(panel, label="Female", pos=(200, 310))
+
+# HEIGHT
+height_label = wx.StaticText(panel, label="Height (cm):", pos=(40, 360))
+height_label.SetFont(wx.Font(12, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
+
+height_input = wx.TextCtrl(panel, pos=(150, 360), size=(100, 25))
+
+# WEIGHT
+weight_label = wx.StaticText(panel, label="Weight (kg):", pos=(40, 410))
+weight_label.SetFont(wx.Font(12, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
+
+weight_input = wx.TextCtrl(panel, pos=(150, 410), size=(100, 25))
 
 frame.Show()
 app.MainLoop()
