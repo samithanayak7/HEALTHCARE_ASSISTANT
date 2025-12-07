@@ -3,7 +3,7 @@ import wx
 app = wx.App(False)
 frame = wx.Frame(None, title="BMI CALCULATOR", size=(1200, 800))
 panel = wx.Panel(frame)
-panel.SetBackgroundColour(wx.Colour(255, 230, 210))
+panel.SetBackgroundColour("#F8C2AF")
 
 # HEADING
 heading = wx.StaticText(panel, label="BMI CALCULATOR", pos=(450, 60))
@@ -16,8 +16,8 @@ sub_heading.SetFont(wx.Font(24, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FON
 sub_heading.SetForegroundColour("#922B21")
 
 #BMI IMAGE
-bmi_img = wx.Image("bmi.png")      # your file name
-bmi_img = bmi_img.Scale(350, 180)
+bmi_img = wx.Image("bmi2.png")      # your file name
+bmi_img = bmi_img.Scale(350, 170)
 bmi_bmp = wx.Bitmap(bmi_img)
 
 bmi_icon = wx.StaticBitmap(panel, bitmap=bmi_bmp, pos=(40, 20))
@@ -26,7 +26,7 @@ bmi_icon = wx.StaticBitmap(panel, bitmap=bmi_bmp, pos=(40, 20))
 # BMI DESCRIPTION
 text = (
     "Body Mass Index (BMI) is a popular metric to help you track your health based on body fat constituency.\n"
-    "You can use this BMI calculator to know your health status.\n"
+    "You can use this BMI calculator to know your health status.\n\n"
     "In today's world of changing lifestyles, stress and unhealthy eating habits, it is highly important to "
     "keep track of your health.\n"
     "By keeping track of your weight, you can take timely measures to reduce the chances of obesity-related health issues."
@@ -35,24 +35,41 @@ text = (
 paragraph = wx.StaticText(panel, label=text, pos=(40, 200))
 paragraph.SetFont(wx.Font(16, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 
+#panel 2
+# SHADOW PANEL (larger)
+shadow = wx.Panel(panel, pos=(40, 360), size=(460, 260))
+shadow.SetBackgroundColour("#FFF9DB")
+
+# FORM PANEL (smaller & above shadow)
+form_panel = wx.Panel(panel, pos=(30, 350), size=(450, 250))
+
+form_panel.SetBackgroundColour("#FCE5B2")
+form_panel.Raise()
+
+
+
+
+
+
+
 # GENDER LABEL
-gender = wx.StaticText(panel, label="Gender:", pos=(40, 310))
+gender = wx.StaticText(form_panel, label="Gender:", pos=(20, 20))
 gender.SetFont(wx.Font(12, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
 
-btn_male = wx.RadioButton(panel, label="Male", pos=(120, 310))
-btn_female = wx.RadioButton(panel, label="Female", pos=(200, 310))
+btn_male = wx.RadioButton(form_panel, label="Male", pos=(120, 20))
+btn_female = wx.RadioButton(form_panel, label="Female", pos=(200, 20))
 
 # HEIGHT
-height_label = wx.StaticText(panel, label="Height (cm):", pos=(40, 360))
+height_label = wx.StaticText(form_panel, label="Height (cm):", pos=(20, 70))
 height_label.SetFont(wx.Font(12, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
 
-height_input = wx.TextCtrl(panel, pos=(150, 360), size=(100, 25))
+height_input = wx.TextCtrl(form_panel, pos=(150, 70), size=(120, 25))
 
 # WEIGHT
-weight_label = wx.StaticText(panel, label="Weight (kg):", pos=(40, 410))
+weight_label = wx.StaticText(form_panel, label="Weight (kg):", pos=(20, 120))
 weight_label.SetFont(wx.Font(12, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
 
-weight_input = wx.TextCtrl(panel, pos=(150, 410), size=(100, 25))
+weight_input = wx.TextCtrl(form_panel, pos=(150, 120), size=(120, 25))
 
 #CALCULATE BMI
 def calculate_BMI(event):
@@ -79,7 +96,7 @@ def calculate_BMI(event):
 
 
 #BMI BUTTON
-btn = wx.Button(panel, label="Calculate your BMI", pos=(40, 460))
+btn = wx.Button(form_panel, label="Calculate your BMI", pos=(20, 180), size=(150, 35))
 btn.Bind(wx.EVT_BUTTON, calculate_BMI)
 
 frame.Show()
